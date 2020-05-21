@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 import axios from 'axios'
 
+import Layout from './components/Layout'
 import RegisterOrLogin from './components/RegisterOrLogin'
 import ProfilePage from './components/ProfilePage'
 
@@ -34,19 +35,20 @@ class App extends React.Component {
     
     return (
       <div className="App">
-        App
-        {
-          !user &&
-          <RegisterOrLogin updateUser={user => this.setState({ user })} />
-        }
+        <Layout>
+          {
+            !user &&
+            <RegisterOrLogin updateUser={user => this.setState({ user })} />
+          }
 
-        {
-          user &&
-          <div>
-            <ProfilePage user={user} />
-            <button onClick={ this.logout }>Logout</button>
-          </div>
-        }
+          {
+            user &&
+            <div>
+              <ProfilePage user={user} />
+              <button onClick={ this.logout }>Logout</button>
+            </div>
+          }
+        </Layout>
       </div>
     )
   }

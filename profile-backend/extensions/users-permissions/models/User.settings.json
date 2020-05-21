@@ -58,6 +58,10 @@
     },
     "favorite_pokemon": {
       "type": "string"
+    },
+    "recipes": {
+      "via": "user",
+      "collection": "recipe"
     }
   }
 }
