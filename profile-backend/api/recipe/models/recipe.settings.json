@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipes",
+  "info": {
+    "name": "Recipe"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Rating": {
+      "type": "integer",
+      "min": 1,
+      "max": 5
+    },
+    "Notes": {
+      "type": "richtext"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "recipes"
+    },
+    "Link": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "categories": {
+      "via": "recipes",
+      "collection": "category"
+    }
+  }
+}
