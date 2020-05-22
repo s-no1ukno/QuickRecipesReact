@@ -20,6 +20,25 @@ app.use(session({ name: 'jwt', keys: ['abc'] }))
 
 /** GET Routes */
 
+// list all recipes
+app.get('/recipes', async (req, res) => {
+  const { jwt } = req.session
+
+  try {
+    const recipesRes = await axios({
+      method: 'GET',
+      url: `${API_URL}/recipes`,
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    })
+    res.send(recipesRes.data)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+
 // Persisting user in session
 app.get('/users/me', async (req, res) => {
   const { jwt } = req.session
@@ -55,6 +74,7 @@ app.put('/users/:userId', async (req, res) => {
   const jwtToken = req.session.jwt
   const data = req.body
   const { userId } = req.params
+
    
   const updateUserRes = await axios({
     method: 'PUT',
@@ -66,6 +86,26 @@ app.put('/users/:userId', async (req, res) => {
   })
 
   res.send(updateUserRes.data)
+})
+
+// Update Recipe
+app.put('/recipes/:id', async (req, res) => {
+  const { jwt } = req.session
+  const data = req.body
+  const { id } = req.params
+
+  console.log('server', data)
+
+  const updatedRecipeRes = await axios({
+    method: 'PUT',
+    url: `${API_URL}/recipes/${id}`,
+    data,
+    headers: {
+      Authorization: `Bearer ${jwt}`
+    }
+  })
+
+  res.send(updatedRecipeRes.data)
 })
 
 /** DELETE Routes */

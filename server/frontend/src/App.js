@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import Layout from './components/Layout'
 import RegisterOrLogin from './components/RegisterOrLogin'
-import ProfilePage from './components/ProfilePage'
+import RecipePage from './components/RecipePage'
 
 class App extends React.Component {
   state = {
@@ -41,13 +41,18 @@ class App extends React.Component {
             <RegisterOrLogin updateUser={user => this.setState({ user })} />
           }
 
-          {
+{
+            user &&
+            <RecipePage />
+          }
+
+          {/* {
             user &&
             <div>
               <ProfilePage user={user} />
               <button onClick={ this.logout }>Logout</button>
             </div>
-          }
+          } */}
         </Layout>
       </div>
     )
