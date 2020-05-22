@@ -35,6 +35,10 @@
     "categories": {
       "via": "recipes",
       "collection": "category"
+    },
+    "notes": {
+      "via": "recipe",
+      "collection": "note"
     }
   }
 }

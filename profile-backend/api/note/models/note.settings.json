@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notes",
+  "info": {
+    "name": "Note"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "Note": {
+      "type": "richtext"
+    },
+    "recipe": {
+      "model": "recipe",
+      "via": "notes"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "notes"
+    }
+  }
+}

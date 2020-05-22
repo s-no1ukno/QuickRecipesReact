@@ -23,6 +23,7 @@ class RecipePage extends React.Component {
       note: ''
     }
 
+
   }
 
   componentDidMount() {
@@ -49,6 +50,8 @@ class RecipePage extends React.Component {
 
   renderPosts = async () => {
 
+    const { user } = this.props
+
     try {
       let res = await axios.get('/recipes')
       const recipes = res.data
@@ -67,7 +70,7 @@ class RecipePage extends React.Component {
             
           // </Card>
 
-          <Recipe key={ i } rec={ recipe } />
+          <Recipe key={ i } rec={ recipe } user={ user }/>
         ))
       })
     } catch (err) {

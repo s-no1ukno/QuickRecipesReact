@@ -5,3 +5,31 @@
 .cards {
   margin: 3rem auto;
 }
+
+button {
+  margin-top: 1rem
+}
+
+hr {
+  border-color: #F9C107
+}
+
+.card-header {
+  border-bottom: 1px solid #F9C107;
+  font-size: 1.5em;
+}
+
+.card-text {
+  margin-top: 1rem;
+}
+
+form {
+  width: 90%;
+  margin: 0 auto;
+}
+
+textarea {
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+}

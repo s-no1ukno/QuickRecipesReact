@@ -17,9 +17,11 @@ class App extends React.Component {
       url: '/users/me',
     })
 
+    
     if (user.data) {
       this.setState({ user: { user: user.data }})
     }
+    console.log(this.state.user)
   }
 
   logout = async () => {
@@ -43,7 +45,7 @@ class App extends React.Component {
 
 {
             user &&
-            <RecipePage />
+            <RecipePage user={ user }/>
           }
 
           {/* {
