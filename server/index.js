@@ -20,6 +20,24 @@ app.use(session({ name: 'jwt', keys: ['abc'] }))
 
 /** GET Routes */
 
+// Get all users
+app.get('/users', async (req, res) => {
+  const { jwt } = req.session
+  
+  try {
+    const usersRes = await axios({
+      method: 'GET',
+      url: `${API_URL}/users`,
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    })
+    res.send(usersRes.data)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 // Get user by Id
 app.get('/users/:id', async (req, res) => {
   const { jwt } = req.session
@@ -97,7 +115,6 @@ app.post('/notes', async (req, res) => {
       Authorization: `Bearer ${jwt}`
     }
   })
-
   res.send(createNoteRes.data)
 })
 
@@ -129,8 +146,6 @@ app.put('/recipes/:id', async (req, res) => {
   const { jwt } = req.session
   const data = req.body
   const { id } = req.params
-
-  console.log('server', data)
 
   const updatedRecipeRes = await axios({
     method: 'PUT',

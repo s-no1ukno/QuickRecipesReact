@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import axios from 'axios'
 
@@ -22,12 +22,11 @@ const NoteModal = (props) => {
       recipe: recId
     }
     
-    const res = await axios({
+    await axios({
       method: 'POST',
       url: '/notes',
       data
     })
-    const result = res.data
  
     setNote('')    
     window.location.reload()

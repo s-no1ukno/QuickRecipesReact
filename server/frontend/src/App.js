@@ -17,6 +17,7 @@ class App extends React.Component {
       url: '/users/me',
     })
 
+    console.log('App.CompDidMount - User Object', user)
     
     if (user.data) {
       this.setState({ user: { user: user.data }})
