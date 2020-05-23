@@ -18,6 +18,7 @@
 
 ### Modal Component
 - [x] Decide how to get user id to update notes on a recipe
+- [?] Match user writing note to user in database
 
 ## Server
 - [ ] Server side validation??
