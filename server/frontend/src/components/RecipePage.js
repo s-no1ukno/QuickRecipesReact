@@ -14,7 +14,7 @@ class RecipePage extends React.Component {
       users: {}
     }
 
-
+    this.getUsers()
   }
 
   componentDidMount() {
@@ -46,7 +46,7 @@ class RecipePage extends React.Component {
     }
     
     render() {
-      this.getUsers()
+      
       
       
      

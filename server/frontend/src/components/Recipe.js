@@ -36,7 +36,7 @@ const Recipe = props => {
                         }
                       })
                     }
-                    <small>{ new Date(note.updated_at).toDateString() }</small><br />
+                    <small> | { new Date(note.updated_at).toDateString() }</small><br />
                     <hr />
                   </div>
                 )

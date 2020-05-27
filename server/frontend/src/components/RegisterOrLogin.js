@@ -1,5 +1,8 @@
 import React from 'react'
 import axios from 'axios'
+
+import { Button } from 'reactstrap'
+
 import { handleChange } from '../utils/inputs'
 
 class RegisterOrLogin extends React.Component {
@@ -7,6 +10,7 @@ class RegisterOrLogin extends React.Component {
     super(props)
 
     this.state = {
+      username: '',
       email: '',
       password: '',
       mode: 'login'
@@ -20,13 +24,13 @@ class RegisterOrLogin extends React.Component {
     e.preventDefault()
 
     // sign the user up with strapi
-    const { email, password, mode } = this.state
+    const { email, password, mode, username } = this.state
 
     const data = {
-      identifier: email,
+      // identifier: email,
+      username,
       email,
-      password,
-      username: email
+      password
     }
 
     let url = ''
@@ -51,32 +55,62 @@ class RegisterOrLogin extends React.Component {
   }
 
   render() {
-    const { email, password, mode } = this.state
+    const { email, password, mode, username } = this.state
 
     return (
-      <div className="Register">
+      <div className='landing'>
         
-      <h1>{ mode }</h1>
-      <form onSubmit={ this.handleSubmit }>
-        <div>
+      {/* <h1>{ mode }</h1> */}
+      <h1 className='header'>Welcome to QuickRecipes!<br />
+        <small>The Recipe Storage App</small>
+      </h1>
+
+      <p className='landing body'>
+        If you've never been here before, this app was created for my wife and mother to have a place to be able to save, and quickly retrieve, recipes that they found on Facebook!
+      </p>
+      
+      <h2>{ mode.toUpperCase() }</h2>
+      <form className='landing-form' onSubmit={ this.handleSubmit }>
+        <div className='form-div'>
+          {
+            mode === 'signup' &&
+            <>
+              <label htmlFor='username'>Username</label>
+              <input name='username' id='username' value={ username } onChange={ this.handleChange } />
+            </>
+          }
           <label htmlFor='email'>Email</label>
-          <input name='email' id='email' value={email} onChange={ this.handleChange } />
+          <input name='email' id='email' value={ email } onChange={ this.handleChange } />
         </div>
-        <div>
+        <div className='form-div'>
           <label htmlFor='password'>Password</label>
           <input type='password' name='password' id='password' value={password} onChange={ this.handleChange } />
         </div>
-        <button type='submit'>{ mode }</button>
+        <Button type='submit' className='form-button' color='primary'>
+          { mode.toUpperCase() }
+        </Button>
       </form>
 
       {
         mode === 'login' &&
-        <p onClick={() => this.setState({ mode: 'signup' })}>Want to signup instead?</p>
+        <Button
+          onClick={() => this.setState({ mode: 'signup' })}
+          className='mode-change-button'
+          color='warning'
+        >
+          Want to signup instead?
+        </Button>
       }
 
       {
         mode === 'signup' &&
-        <p onClick={() => this.setState({ mode: 'login' })}>Want to login instead?</p>
+        <Button
+          onClick={() => this.setState({ mode: 'login' })}
+          className='mode-change-button'
+          color='warning'
+        >
+          Want to login instead?
+        </Button>
       }
       </div>
     )

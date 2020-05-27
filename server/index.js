@@ -182,17 +182,30 @@ app.post('/api/auth/local', async (req, res) => {
 
 // registration - /api/auth/local/register
 app.post('/api/auth/local/register', async (req, res) => {
-  const newUserRes = await axios({
-    method: 'POST',
-    url: `${API_URL}/auth/local/register`,
-    data: req.body
-  })
+  
+  try {
+    const newUserRes = await axios({
+      method: 'POST',
+      url: `${API_URL}/auth/local/register`,
+      data: req.body
+    })  
 
-  const { jwt, user } = newUserRes.data
-  req.session.jwt = jwt
+    console.log(newUserRes.data)
 
-  const data = { user }
-  res.send(data)
+    // const { jwt, user } = newUserRes.data
+    // req.session.jwt = jwt
+
+    // const data = { user }
+    // res.send(data)
+
+  } catch (error) {
+    console.error(error.response.data)
+  }
+  
+
+  console.log(req.body)
+
+  
 })
 
 // last route, catch all

@@ -2,6 +2,8 @@
 
 ## Frontend
 - [x] Match frontend to whatever I decide to do with the API for Notes component
+- [ ] Create landing page for non-user
+  - [ ] description of app
 - [ ] Get Register Page updated with a username input
   - [ ] Double check that Register page matches the rest of the model for Strapi
 - [ ] Get form validation rolling on all forms
@@ -18,7 +20,7 @@
 
 ### Modal Component
 - [x] Decide how to get user id to update notes on a recipe
-- [?] Match user writing note to user in database
+- [x] Match user writing note to user in database
 
 ## Server
 - [ ] Server side validation??
