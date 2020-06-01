@@ -27,7 +27,7 @@ class RegisterOrLogin extends React.Component {
     const { email, password, mode, username } = this.state
 
     const data = {
-      // identifier: email,
+      identifier: email || username,
       username,
       email,
       password
@@ -79,7 +79,7 @@ class RegisterOrLogin extends React.Component {
               <input name='username' id='username' value={ username } onChange={ this.handleChange } />
             </>
           }
-          <label htmlFor='email'>Email</label>
+          { mode === 'login' ? <label htmlFor='email'>Username or Email</label> : <label htmlFor='email'>Email</label> }
           <input name='email' id='email' value={ email } onChange={ this.handleChange } />
         </div>
         <div className='form-div'>

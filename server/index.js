@@ -95,9 +95,14 @@ app.get('/users/me', async (req, res) => {
 })
 
 // Logout route
-app.get('/users/logout', (req, res) => {
-  req.session.jwt = null
-  res.send({ status: 200 })
+app.get('/user/logout', (req, res) => {
+
+  try {
+    req.session.jwt = null
+    res.send({ status: 200 })
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 /** POST Routes */
@@ -167,17 +172,22 @@ app.put('/recipes/:id', async (req, res) => {
 
 // authentication - /api/auth/local
 app.post('/api/auth/local', async (req, res) => {
-  const loginRes = await axios({
-    method: 'POST',
-    url: `${API_URL}/auth/local`,
-    data: req.body
-  })
-
-  const { jwt, user } = loginRes.data
-  req.session.jwt = jwt
-
-  const data = { user }
-  res.send(data)
+  try {
+    const loginRes = await axios({
+      method: 'POST',
+      url: `${API_URL}/auth/local`,
+      data: req.body
+    })
+  
+    const { jwt, user } = loginRes.data
+    req.session.jwt = jwt
+  
+    const data = { user }
+    res.send(data)
+  } catch (error) {
+    console.error(error.response.data.message[0])
+  }
+  
 })
 
 // registration - /api/auth/local/register
@@ -190,20 +200,19 @@ app.post('/api/auth/local/register', async (req, res) => {
       data: req.body
     })  
 
-    console.log(newUserRes.data)
+    const { jwt, user } = newUserRes.data
+    req.session.jwt = jwt
 
-    // const { jwt, user } = newUserRes.data
-    // req.session.jwt = jwt
-
-    // const data = { user }
-    // res.send(data)
+    const data = { user }
+    res.send(data)
 
   } catch (error) {
-    console.error(error.response.data)
+    console.error(error.response.data.message[0].messages[0].message)
+    // if (error.response.data.message && error.response.data.message[0].messages[0].message.includes('username')) {
+    //   res.status(400)
+    //   res.send('Looks like that username has already been taken...')
+    // }
   }
-  
-
-  console.log(req.body)
 
   
 })

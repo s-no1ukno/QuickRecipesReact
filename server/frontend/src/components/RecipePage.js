@@ -11,14 +11,16 @@ class RecipePage extends React.Component {
     this.state = {
       Recipes: null,
       note: '',
-      users: {}
     }
 
-    this.getUsers()
   }
 
   componentDidMount() {
     this.renderPosts()
+    // this.getUsers()
+
+    console.log('Recipe page props.user', this.props.user)
+    console.log('Recipe page state.users', this.state.users)
   }
   
   getUsers = async () => {
@@ -30,14 +32,12 @@ class RecipePage extends React.Component {
   
   renderPosts = async () => {
     
-    const { user } = this.props
-    
     try {
       let res = await axios.get('/recipes')
       const recipes = res.data
       this.setState({
         Recipes: recipes.map((recipe, i) => (
-          <Recipe key={ i } rec={ recipe } me={ user } users={ this.state.users } />
+          <Recipe key={ i } rec={ recipe } />
           ))
         })
       } catch (err) {

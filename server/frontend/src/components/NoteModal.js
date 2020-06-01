@@ -6,8 +6,7 @@ const NoteModal = (props) => {
   const {
     buttonLabel,
     className,
-    recId,
-    recUser
+    recId
   } = props
 
   const [modal, setModal] = useState(false)
@@ -16,9 +15,26 @@ const NoteModal = (props) => {
   const toggle = () => setModal(!modal)
 
   const handleSubmit = async () => {
+    // const newMe = await axios.get('/users/me')
+    let noteUserId = ''
+    let me = ''
+
+    // compare users/me against all users
+    const m = await axios.get('/users/me')
+    me = m.data
+
+    const usersRes = await axios.get('/users')
+
+    usersRes.data.map(user => {
+      if (user.username === me) {
+        noteUserId = user.id
+      }
+    })
+
+    // Send user id for 'me' to strapi with note data
     const data = {
       Note: note,
-      user: recUser,
+      user: noteUserId,
       recipe: recId
     }
     

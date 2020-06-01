@@ -26,11 +26,9 @@ class App extends React.Component {
   }
 
   logout = async () => {
-    await axios({
-      method: 'GET',
-      url:'/users/logout'
-    })
+    await axios.get('/user/logout')
     this.setState({ user: null })
+    window.location.reload()
   }
 
   render() {
@@ -49,13 +47,12 @@ class App extends React.Component {
             <RecipePage user={ user }/>
           }
 
-          {/* {
+          {
             user &&
             <div>
-              <ProfilePage user={user} />
               <button onClick={ this.logout }>Logout</button>
             </div>
-          } */}
+          }
         </Layout>
       </div>
     )

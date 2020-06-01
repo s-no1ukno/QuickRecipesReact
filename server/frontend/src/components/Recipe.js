@@ -5,13 +5,20 @@ import axios from 'axios'
 import NoteModal from './NoteModal'
 
 const Recipe = props => {
-  const { rec, users, me } = props
-
-  console.log('Recipe.props.users', users)
+  const { rec } = props
+  
+  const getUsers = () => {
+    const u = axios.get('/users')
+    const data = u.data 
+    return data 
+  }
 
   const handleRatingSubmit = async () => {
     
   }  
+
+
+  
 
   return (
     <div>
@@ -25,17 +32,21 @@ const Recipe = props => {
             {
               rec.notes.map(note => {
                 
-                console.log('note', note)
                 return (
                   <div>
                     <ReactMarkdown source={ note.Note } />
-                    {
-                      users.map(user => {
+                    
+                    {/* Broken here, somehow
+                        issues with promise not resolving and user being undefined
+                    */}
+                    
+                    {/* {
+                     getUsers().map(user => {
                         if (user.id === note.user) {
                           return <small>{ user.username }</small>
                         }
                       })
-                    }
+                    } */}
                     <small> | { new Date(note.updated_at).toDateString() }</small><br />
                     <hr />
                   </div>
@@ -52,7 +63,7 @@ const Recipe = props => {
             <CardText>Rating: 0 Stars!</CardText>
           }
         </div>
-        <NoteModal buttonLabel='Add A Note!' users={ users } recId={ rec.id } recUser={ rec.user.id } />
+        <NoteModal buttonLabel='Add A Note!' recId={ rec.id } recUser={ rec.user.id } />
         <Button color='warning' outline onClick={ handleRatingSubmit }>Update Rating</Button>
         <Button color='danger' size='lg'>Go To Recipe</Button>
       </Card>
